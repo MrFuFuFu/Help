@@ -1,0 +1,81 @@
+# Site settings
+title: Card Diary
+SEOTitle: Card Diary | Card | Diary
+header-img: img/home-bg.jpg
+email: mrfuyuan@gmail.com
+description: "Card Diary is a perfect place for you to think, feel, discover, remember, and dream."
+keyword: "Card,Diary"
+url: "https://carddiary.me/help"
+baseurl: ""
+
+
+
+# SNS settings
+RSS: false
+twitter_username: card_diary
+# facebook_username:  mrfufufu
+instagram_username: card.diary
+
+
+# Build settings
+highlighter: rouge #pygments
+permalink: pretty
+paginate: 100
+exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
+anchorjs: true                          # if you want to customize anchor. check out line:181 of `post.html`
+
+
+# PAGINATION
+gems: [jekyll-paginate]
+paginate: 100
+paginate_path: "page:num"
+
+
+
+# Markdown settings
+# replace redcarpet to kramdown,
+# although redcarpet can auto highlight code, the lack of header-id make the catalog impossible, so I switch to kramdown
+# document: http://jekyllrb.com/docs/configuration/#kramdown
+markdown: kramdown
+kramdown:
+  input: GFM                            # use Github Flavored Markdown !important
+
+# Disqus settings
+# disqus_username: mrfu
+
+# Analytics settings
+# Baidu Analytics
+# ba_track_id: c3407349cc1129e07d0c33c8714b6175
+# Google Analytics
+# ga_track_id: 'UA-69471101-1'            # Format: UA-xxxxxx-xx
+# ga_domain: mrfu
+
+
+
+# Sidebar settings
+sidebar: false                           # whether or not using Sidebar.
+sidebar-about-description: "Coder, Paraglider, Marathoner, RC Helicopter"
+sidebar-avatar: /img/avatar-mrfu.png     # use absolute URL.
+
+
+
+# Featured Tags
+featured-tags: true                     # whether or not using Feature-Tags
+featured-condition-size: 1              # A tag will be featured if the size of it is more than this condition value
+
+
+
+# Friends
+# friends: [
+#     {
+#         title: "maple Blog",
+#         href: "http://maples.me/"
+#     },{
+#         title: "程序亦非猿的OnePiece",
+#         href: "http://yifeiyuan.me/"
+#     },{
+#         title: "小鄧子 - 简书",
+#         href: "http://www.jianshu.com/users/df40282480b4/latest_articles"
+#     }
+# ]
+

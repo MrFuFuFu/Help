@@ -1,0 +1,66 @@
+---
+layout: page
+title: "About"
+description: "Hey, this is MrFu."
+header-img: "img/about-bg.jpg"
+---
+
+<div class="zh">
+    <blockquote>
+        Coder, Paraglider, Marathoner, RC Helicopter
+    </blockquote>
+
+    <p>Hi, I'm Yuan Fu, an Mobile Developer. ^ ^</p>
+
+    Resumes:
+    <ul class="active-list">
+        <li><a href="{{site.baseUrl}}/attach/YuanFu-CV-2018.pdf"> 2018-YuanFu-CV </a></li>
+        <br/>
+        <li style="font-size: 12px;"><a href="{{site.baseUrl}}/attach/YuanFu-Resume-2017.pdf"> 2017-YuanFu-Resume </a></li>
+        <li style="font-size: 12px;"><a href="{{site.baseUrl}}/attach/2016-mrfu-Resume-Android.pdf"> 2016-YuanFu-Resume-Android </a></li>
+        <li style="font-size: 12px;"><a href="{{site.baseUrl}}/attach/2015-mrfu-Resume-Android.pdf"> 2015-傅圆-简历-Android </a></li>
+        <li style="font-size: 12px;"><a href="{{site.baseUrl}}/attach/2014-mrfu-Resume-Android.pdf"> 2014-傅圆-简历-Android </a></li>
+    </ul>
+
+    <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
+
+    <div class="LI-profile-badge"  data-version="v1" data-size="large" data-locale="en_US" data-type="horizontal" data-theme="light" data-vanity="mrfufufu"><a class="LI-simple-link" href='https://cn.linkedin.com/in/mrfufufu/en?trk=profile-badge'>Ewan Fu</a></div>
+
+    <p><a href="mailto:mrfuyuan@gmail.com?subject=Hello%20again">mrfuyuan@gmail.com</a></p>
+
+    <p><a href="https://github.com/MrFuFuFu">Github</a></p>
+    <!-- <p><a href="https://cn.linkedin.com/pub/yuan-fu/bb/69/368">LinkedIn</a></p> -->
+    <p><a href="http://www.jianshu.com/users/c1b9d1faa7b5/latest_articles">简书</a></p>
+    <p><a href="http://www.shanbay.com/bdc/review/progress/12563734">扇贝</a></p>
+    <p><a href="https://www.facebook.com/profile.php?id=100006538561748">Facebook</a></p>
+    <!-- <p><a href="https://twitter.com/15068728607">Twitter</a></p> -->
+    <p><a href="https://instagram.com/mrfufufufu/">Instagram</a></p>    
+    <!-- <p><a href="http://www.zhihu.com/people/fu-yuan-58">知乎</a></p> -->
+    <!-- <p><a href="http://blog.csdn.net/fu222cs98">CSDN</a></p> -->
+</div>
+
+
+{% if site.disqus_username %}
+<!-- disqus 评论框 start -->
+<div class="comment">
+    <div id="disqus_thread" class="disqus-thread">
+
+    </div>
+</div>
+<!-- disqus 评论框 end -->
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "{{site.disqus_username}}";
+    var disqus_identifier = "{{site.disqus_username}}/{{page.url}}";
+    var disqus_url = "{{site.url}}{{page.url}}";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+{% endif %}

@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.">
+    <meta name="keywords"  content="">
+    <meta name="theme-color" content="">
+
+    <title>Swift Apprentice I -- Basic Topics - </title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://localhost:4000/2017/12/01/Swift_Apprentice_I.html">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Your awesome title</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <!-- <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about.html">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/learn.html">Learn</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags.html">Tags</a>
+                    </li>
+                     -->
+
+                    <li>
+                    <a href="/">Home</a>
+                    </li>
+                    <!--
+                    <li>
+                        <a href="/about.html">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/learn.html">Learn</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags.html">Tags</a>
+                    </li>
+                    -->
+                    
+                    <!--<li>
+                        <a href="/learn/">Learn</a>
+                    </li>-->
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/post-bg-swift-apprentice.png" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/post-bg-swift-apprentice.png')
+    }
+
+    
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#Swift" title="Swift">Swift</a>
+                        
+                    </div>
+                    <h1>Swift Apprentice I -- Basic Topics</h1>
+                    
+                    
+                    <h2 class="subheading">Swift notes</h2>
+                    
+                    <span class="meta">Posted by MrFu on December 1, 2017</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+				<blockquote>
+  <p>The notes of <a href="https://store.raywenderlich.com/products/swift-apprentice">Swift Apprentice</a></p>
+</blockquote>
+
+<h2 id="collection">Collection</h2>
+
+<h3 id="array">Array</h3>
+
+<h4 id="updating-elements">updating elements</h4>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="nv">players</span> <span class="o">=</span> <span class="p">[</span><span class="s">"A"</span><span class="p">,</span> <span class="s">"B"</span><span class="p">,</span> <span class="s">"C"</span><span class="p">,</span> <span class="s">"D"</span><span class="p">]</span>
+<span class="n">players</span><span class="p">[</span><span class="mi">0</span><span class="o">...</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s">"1"</span><span class="p">,</span> <span class="s">"2"</span><span class="p">,</span> <span class="s">"3"</span><span class="p">,</span> <span class="s">"4"</span><span class="p">]</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">players</span><span class="p">)</span>
+<span class="c1">// &gt; ["1", "2", "3", "4", "C", "D"]</span>
+</code></pre></div></div>
+<p>This code means using <code class="highlighter-rouge">["1", "2", "3", "4"]</code> to replace the first two players. The size of the range doesn’t have to be equal to the size of the array that holds the values you’re adding.</p>
+
+<h4 id="moving-elements">Moving elements</h4>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//Remove "4" and instert it into 0 position</span>
+<span class="k">let</span> <span class="nv">player4</span> <span class="o">=</span> <span class="n">players</span><span class="o">.</span><span class="nf">remove</span><span class="p">(</span><span class="nv">at</span><span class="p">:</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">players</span><span class="o">.</span><span class="nf">insert</span><span class="p">(</span><span class="n">player4</span><span class="p">,</span> <span class="nv">at</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">players</span><span class="p">)</span>
+<span class="c1">// &gt; "["4", "1", "2", "3", "C", "D"]</span>
+
+<span class="c1">//Swap position 1 and 3</span>
+<span class="n">players</span><span class="o">.</span><span class="nf">swapAt</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">players</span><span class="p">)</span>
+<span class="c1">// &gt; "["4", "3", "2", "1", "C", "D"]</span>
+</code></pre></div></div>
+
+<h4 id="iterating">Iterating</h4>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">player</span><span class="p">)</span> <span class="k">in</span> <span class="n">players</span><span class="o">.</span><span class="nf">enumerated</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"</span><span class="se">\(</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="se">)</span><span class="s">. </span><span class="se">\(</span><span class="n">player</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="c1">// &gt; 1. 4</span>
+<span class="c1">// &gt; 2. 3</span>
+<span class="c1">// &gt; 3. 2</span>
+<span class="c1">// &gt; 4. 1</span>
+<span class="c1">// &gt; 5. C</span>
+<span class="c1">// &gt; 6. D</span>
+</code></pre></div></div>
+
+<h3 id="dictionaries">Dictionaries</h3>
+
+<h4 id="adding-pairs--updating-values--removing-pairs">Adding pairs / Updating values / Removing pairs</h4>
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="nv">bobData</span> <span class="o">=</span> <span class="p">[</span><span class="s">"name"</span><span class="p">:</span> <span class="s">"Bob"</span><span class="p">,</span> <span class="s">"profession"</span><span class="p">:</span> <span class="s">"Card Player"</span><span class="p">,</span> <span class="s">"country"</span><span class="p">:</span> <span class="s">"USA"</span><span class="p">]</span>
+<span class="c1">//Adding</span>
+<span class="n">bobData</span><span class="o">.</span><span class="nf">updateValue</span><span class="p">(</span><span class="s">"CA"</span><span class="p">,</span> <span class="nv">forKey</span><span class="p">:</span> <span class="s">"state"</span><span class="p">)</span>
+<span class="n">bobData</span><span class="p">[</span><span class="s">"city"</span><span class="p">]</span> <span class="o">=</span> <span class="s">"San Francisco"</span>
+
+<span class="c1">//Updating</span>
+<span class="n">bobData</span><span class="o">.</span><span class="nf">updateValue</span><span class="p">(</span><span class="s">"Bobby"</span><span class="p">,</span> <span class="nv">forKey</span><span class="p">:</span> <span class="s">"name"</span><span class="p">)</span>
+<span class="n">bobData</span><span class="p">[</span><span class="s">"profession"</span><span class="p">]</span> <span class="o">=</span> <span class="s">"Mailman"</span>
+
+<span class="c1">//Removing</span>
+<span class="n">bobData</span><span class="o">.</span><span class="nf">removeValue</span><span class="p">(</span><span class="nv">forKey</span><span class="p">:</span> <span class="s">"state"</span><span class="p">)</span>
+<span class="n">bobData</span><span class="p">[</span><span class="s">"city"</span><span class="p">]</span> <span class="o">=</span> <span class="kc">nil</span>
+</code></pre></div></div>
+
+<h4 id="iterating-1">Iterating</h4>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="p">(</span><span class="n">player</span><span class="p">,</span> <span class="n">score</span><span class="p">)</span> <span class="k">in</span> <span class="n">namesAndScores</span> <span class="p">{</span><span class="c1">//key and value</span>
+  <span class="nf">print</span><span class="p">(</span><span class="s">"</span><span class="se">\(</span><span class="n">player</span><span class="se">)</span><span class="s"> - </span><span class="se">\(</span><span class="n">score</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="k">for</span> <span class="n">player</span> <span class="k">in</span> <span class="n">namesAndScores</span><span class="o">.</span><span class="n">keys</span> <span class="p">{</span><span class="c1">//only key</span>
+  <span class="nf">print</span><span class="p">(</span><span class="s">"</span><span class="se">\(</span><span class="n">player</span><span class="se">)</span><span class="s">, "</span><span class="p">,</span> <span class="nv">terminator</span><span class="p">:</span> <span class="s">""</span><span class="p">)</span> <span class="c1">// no newline</span>
+<span class="p">}</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">""</span><span class="p">)</span> <span class="c1">// print one final newline</span>
+</code></pre></div></div>
+
+<h3 id="sets">Sets</h3>
+
+<blockquote>
+  <p>A set is an unordered collection of unique values of the same type.</p>
+</blockquote>
+
+<h4 id="creating-sets">Creating sets</h4>
+
+<p>Sets don’t have their own literals. We use <strong>array literals</strong> to create a set with initial values.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="nv">someSet</span><span class="p">:</span> <span class="kt">Set</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">someSet</span><span class="p">)</span>
+<span class="c1">// &gt; [2, 3, 1]</span>
+</code></pre></div></div>
+
+<p>As you see, there is no specific ordering and the values are unique.</p>
+
+<h3 id="collection-iteration-with-closures">Collection Iteration with Closures</h3>
+
+<h4 id="closures-basics">Closures basics</h4>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//Declaration</span>
+<span class="k">var</span> <span class="nv">multiplyClosure</span><span class="p">:</span> <span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span>
+
+<span class="c1">//Assign a closure to a variable</span>
+<span class="n">multiplyClosure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">a</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">b</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span> <span class="k">in</span>
+  <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span>
+<span class="p">}</span>
+<span class="c1">//Use</span>
+<span class="k">let</span> <span class="nv">result</span> <span class="o">=</span> <span class="nf">multiplyClosure</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="c1">//Shorthand syntax</span>
+<span class="n">multiplyClosure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">a</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">b</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span> <span class="k">in</span>
+  <span class="n">a</span> <span class="o">*</span> <span class="n">b</span>
+<span class="p">}</span>
+<span class="c1">//or</span>
+<span class="n">multiplyClosure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="k">in</span>
+  <span class="n">a</span> <span class="o">*</span> <span class="n">b</span>
+<span class="p">}</span>
+<span class="c1">//or</span>
+<span class="n">multiplyClosure</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nv">$0</span> <span class="o">*</span> <span class="nv">$1</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Further more, if the parameter list is much longer it can be confusing to remember. We can use the named syntax.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">operateOnNumbers</span><span class="p">(</span><span class="n">_</span> <span class="nv">a</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">_</span> <span class="nv">b</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">operation</span><span class="p">:</span> <span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span> <span class="p">{</span>
+  <span class="k">let</span> <span class="nv">result</span> <span class="o">=</span> <span class="nf">operation</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+  <span class="nf">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">result</span>
+<span class="p">}</span>
+
+<span class="c1">//and then</span>
+
+<span class="k">let</span> <span class="nv">addClosure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">a</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">b</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="k">in</span>
+  <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+<span class="p">}</span>
+<span class="nf">operateOnNumbers</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="nv">operation</span><span class="p">:</span> <span class="n">addClosure</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Closures are simply functions without names. So we can also pass in a function as the parameter, like so:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">addFunction</span><span class="p">(</span><span class="n">_</span> <span class="nv">a</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">_</span> <span class="nv">b</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+<span class="p">}</span>
+<span class="nf">operateOnNumbers</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="nv">operation</span><span class="p">:</span> <span class="n">addFunction</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<p>or even, define the closure inline with the function call, so no need to define the closure and assign it to a local variable or constant. Just simply declare the closure right whre you pass it into the function as a parameter! like this:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">operateOnNumbers</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="nv">operation</span><span class="p">:</span> <span class="p">{</span> <span class="p">(</span><span class="nv">a</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">b</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span> <span class="k">in</span>
+  <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+<span class="p">})</span>
+<span class="c1">//Shorthand syntax</span>
+<span class="nf">operateOnNumbers</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="nv">operation</span><span class="p">:</span> <span class="p">{</span> <span class="nv">$0</span> <span class="o">+</span> <span class="nv">$1</span> <span class="p">})</span>
+<span class="c1">//or</span>
+<span class="nf">operateOnNumbers</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="nv">operation</span><span class="p">:</span> <span class="o">+</span><span class="p">)</span>
+<span class="c1">//or move to outside of the function call</span>
+<span class="nf">operateOnNumbers</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span><span class="c1">//This is called trailing closure syntax.</span>
+  <span class="nv">$0</span> <span class="o">+</span> <span class="nv">$1</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="closures-with-no-return-value">Closures with no return value</h4>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">voidClosure</span><span class="p">:</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nf">print</span><span class="p">(</span><span class="s">"Swift Apprentice is awesome!"</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="nf">voidClosure</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>The closure’s type is <code class="highlighter-rouge">() -&gt; Void</code>. No parameters, no return type (But you must declare a return type)</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">countingClosure</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Int</span> <span class="p">{</span>
+  <span class="k">var</span> <span class="nv">counter</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="k">let</span> <span class="nv">incrementCounter</span><span class="p">:</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Int</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">counter</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="n">incrementCounter</span>
+<span class="p">}</span>
+
+<span class="k">let</span> <span class="nv">counter1</span> <span class="o">=</span> <span class="nf">countingClosure</span><span class="p">()</span>
+<span class="k">let</span> <span class="nv">counter2</span> <span class="o">=</span> <span class="nf">countingClosure</span><span class="p">()</span>
+
+<span class="nf">counter1</span><span class="p">()</span> <span class="c1">// 1</span>
+<span class="nf">counter2</span><span class="p">()</span> <span class="c1">// 1</span>
+<span class="nf">counter1</span><span class="p">()</span> <span class="c1">// 2</span>
+<span class="nf">counter1</span><span class="p">()</span> <span class="c1">// 3</span>
+<span class="nf">counter2</span><span class="p">()</span> <span class="c1">// 2</span>
+<span class="c1">//The two counters are mutually exclusive and count independently.</span>
+</code></pre></div></div>
+
+<p>This function taks no parameters and returns a closure. The closure it returns an <em>Int</em>.</p>
+
+<p>The closure returned from this function will increment its internal counter each time it is called. Each time you call this function you get a different counter.</p>
+
+<h4 id="custom-sorting-with-closures">Custom sorting with closures</h4>
+
+<p>Sorting</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">names</span> <span class="o">=</span> <span class="p">[</span><span class="s">"ZZZZZZ"</span><span class="p">,</span> <span class="s">"BB"</span><span class="p">,</span> <span class="s">"A"</span><span class="p">,</span> <span class="s">"CCCC"</span><span class="p">,</span> <span class="s">"EEEEE"</span><span class="p">]</span>
+<span class="k">let</span> <span class="nv">sortedByLength</span> <span class="o">=</span> <span class="n">names</span><span class="o">.</span><span class="n">sorted</span> <span class="p">{</span>
+  <span class="nv">$0</span><span class="o">.</span><span class="n">count</span> <span class="o">&gt;</span> <span class="nv">$1</span><span class="o">.</span><span class="n">count</span>
+<span class="p">}</span>
+<span class="n">sortedByLength</span> <span class="c1">//["ZZZZZZ", "EEEEE", "CCCC", "BB", "A"]</span>
+</code></pre></div></div>
+
+<p>Functional</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="nv">prices</span> <span class="o">=</span> <span class="p">[</span>  <span class="mf">1.5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">4.99</span><span class="p">,</span> <span class="mf">2.30</span><span class="p">,</span> <span class="mf">8.19</span><span class="p">]</span>
+
+<span class="c1">//func filter(_ isIncluded: (Element) -&gt; Bool) -&gt; [Element]</span>
+<span class="k">let</span> <span class="nv">largePrices</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">filter</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nv">$0</span> <span class="o">&gt;</span> <span class="mi">5</span>
+<span class="p">}</span><span class="c1">//[10, 8.19] // new array</span>
+
+<span class="k">let</span> <span class="nv">salePrices</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nv">$0</span> <span class="o">*</span> <span class="mf">0.9</span>
+<span class="p">}</span><span class="c1">//[1.35, 9, 4.491, 2.07, 7.371]</span>
+
+<span class="k">let</span> <span class="nv">userInput</span> <span class="o">=</span> <span class="p">[</span><span class="s">"0"</span><span class="p">,</span> <span class="s">"11"</span><span class="p">,</span> <span class="s">"haha"</span><span class="p">,</span> <span class="s">"42"</span><span class="p">]</span>
+
+<span class="k">let</span> <span class="nv">numbers1</span> <span class="o">=</span> <span class="n">userInput</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span>
+  <span class="kt">Int</span><span class="p">(</span><span class="nv">$0</span><span class="p">)</span><span class="c1">//it's optional</span>
+<span class="p">}</span><span class="c1">//[{some 0}, {some 11}, nil, {some 42}]</span>
+
+<span class="c1">//flatMap will filter out the invalide values</span>
+<span class="k">let</span> <span class="nv">numbers2</span> <span class="o">=</span> <span class="n">userInput</span><span class="o">.</span><span class="n">flatMap</span> <span class="p">{</span>
+  <span class="kt">Int</span><span class="p">(</span><span class="nv">$0</span><span class="p">)</span>
+<span class="p">}</span><span class="c1">//[0, 11, 42]</span>
+
+</code></pre></div></div>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//reduce takes a starting value and a closure. </span>
+<span class="c1">//The closure takes two values: the current value and an element from the array. </span>
+<span class="c1">//The closure returns the next value that should be passed into the closure as the current value parameter.</span>
+
+<span class="k">let</span> <span class="nv">sum</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="nf">reduce</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nv">$0</span> <span class="o">+</span> <span class="nv">$1</span>
+<span class="p">}</span><span class="c1">//26.98</span>
+
+<span class="k">let</span> <span class="nv">stock</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.5</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">4.99</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span> <span class="mf">2.30</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">8.19</span><span class="p">:</span> <span class="mi">30</span><span class="p">]</span>
+<span class="k">let</span> <span class="nv">stockSum</span> <span class="o">=</span> <span class="n">stock</span><span class="o">.</span><span class="nf">reduce</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nv">$0</span> <span class="o">+</span> <span class="nv">$1</span><span class="o">.</span><span class="n">key</span> <span class="o">*</span> <span class="kt">Double</span><span class="p">(</span><span class="nv">$1</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+<span class="p">}</span><span class="c1">//384.5</span>
+
+<span class="c1">//reduce(into:_:)</span>
+<span class="k">let</span> <span class="nv">farmAnimals</span> <span class="o">=</span> <span class="p">[</span><span class="s">"🐎"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">"🐄"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s">"🐑"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s">"🐶"</span><span class="p">:</span> <span class="mi">1</span><span class="p">]</span>
+<span class="k">let</span> <span class="nv">allAnimals</span> <span class="o">=</span> <span class="n">farmAnimals</span><span class="o">.</span><span class="nf">reduce</span><span class="p">(</span><span class="nv">into</span><span class="p">:</span> <span class="p">[])</span> <span class="p">{</span>
+  <span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="nv">this</span><span class="p">:</span> <span class="p">(</span><span class="nv">key</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Int</span><span class="p">))</span> <span class="k">in</span>
+  <span class="k">for</span> <span class="n">_</span> <span class="k">in</span> <span class="mi">0</span> <span class="o">..&lt;</span> <span class="n">this</span><span class="o">.</span><span class="n">value</span> <span class="p">{</span>
+    <span class="n">result</span><span class="o">.</span><span class="nf">append</span><span class="p">(</span><span class="n">this</span><span class="o">.</span><span class="n">key</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span><span class="c1">//["🐎", "🐑", "🐑", "🐑", "🐄", "🐄", "🐶"]</span>
+</code></pre></div></div>
+
+<h4 id="others">Others</h4>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="nv">prices</span> <span class="o">=</span> <span class="p">[</span>  <span class="mf">1.5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">4.99</span><span class="p">,</span> <span class="mf">2.30</span><span class="p">,</span> <span class="mf">8.19</span><span class="p">]</span>
+<span class="k">let</span> <span class="nv">removeFirst</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="nf">dropFirst</span><span class="p">()</span><span class="c1">//[10, 4.99, 2.3, 8.19]</span>
+<span class="k">let</span> <span class="nv">removeFirstTwo</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="nf">dropFirst</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="c1">//[4.99, 2.3, 8.19]</span>
+
+<span class="k">let</span> <span class="nv">removeLast</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="nf">dropLast</span><span class="p">()</span><span class="c1">//[1.5, 10, 4.99, 2.3]</span>
+<span class="k">let</span> <span class="nv">removeLastTwo</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="nf">dropLast</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="c1">//[1.5, 10, 4.99]</span>
+
+<span class="k">let</span> <span class="nv">firstTwo</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="nf">prefix</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="c1">//[1.5, 10]</span>
+<span class="k">let</span> <span class="nv">lastTwo</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="nf">suffix</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="c1">//[2.3, 8.19]</span>
+</code></pre></div></div>
+
+<h3 id="strings">Strings</h3>
+
+<blockquote>
+  <p>strings are collections.</p>
+</blockquote>
+
+<h4 id="indexing-strings">Indexing strings</h4>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">cafeCombining</span> <span class="o">=</span> <span class="s">"cafe</span><span class="se">\u{0301}</span><span class="s">"</span>
+<span class="k">let</span> <span class="nv">firstIndex</span> <span class="o">=</span> <span class="n">cafeCombining</span><span class="o">.</span><span class="n">startIndex</span> <span class="c1">// type is String.Index</span>
+<span class="k">let</span> <span class="nv">firstChar</span> <span class="o">=</span> <span class="n">cafeCombining</span><span class="p">[</span><span class="n">firstIndex</span><span class="p">]</span><span class="c1">//"c"</span>
+
+<span class="k">let</span> <span class="nv">lastIndex</span> <span class="o">=</span> <span class="n">cafeCombining</span><span class="o">.</span><span class="nf">index</span><span class="p">(</span><span class="nv">before</span><span class="p">:</span> <span class="n">cafeCombining</span><span class="o">.</span><span class="n">endIndex</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">lastChar</span> <span class="o">=</span> <span class="n">cafeCombining</span><span class="p">[</span><span class="n">lastIndex</span><span class="p">]</span><span class="c1">//"é"</span>
+</code></pre></div></div>
+
+<h4 id="strings-as-bi-directional-collections">Strings as bi-directional collections</h4>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">name</span> <span class="o">=</span> <span class="s">"Matt"</span>
+<span class="k">let</span> <span class="nv">backwardsName</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="nf">reversed</span><span class="p">()</span><span class="c1">//Type is ReversedCollection&lt;String&gt;</span>
+<span class="k">let</span> <span class="nv">secondCharIndex</span> <span class="o">=</span> <span class="n">backwardsName</span><span class="o">.</span><span class="nf">index</span><span class="p">(</span><span class="n">backwardsName</span><span class="o">.</span><span class="n">startIndex</span><span class="p">,</span> <span class="nv">offsetBy</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span><span class="c1">//Type is ReversedIndex&lt;String&gt;</span>
+<span class="k">let</span> <span class="nv">secondChar</span> <span class="o">=</span> <span class="n">backwardsName</span><span class="p">[</span><span class="n">secondCharIndex</span><span class="p">]</span><span class="c1">//"t"</span>
+
+<span class="k">let</span> <span class="nv">backwardsNameString</span> <span class="o">=</span> <span class="kt">String</span><span class="p">(</span><span class="n">backwardsName</span><span class="p">)</span><span class="c1">//"ttaM"</span>
+</code></pre></div></div>
+
+<h4 id="substrings">Substrings</h4>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">fullName</span> <span class="o">=</span> <span class="s">"Matt Galloway"</span>
+<span class="k">let</span> <span class="nv">spaceIndex</span> <span class="o">=</span> <span class="n">fullName</span><span class="o">.</span><span class="nf">index</span><span class="p">(</span><span class="nv">of</span><span class="p">:</span> <span class="s">" "</span><span class="p">)</span><span class="o">!</span>
+<span class="k">let</span> <span class="nv">firstName</span> <span class="o">=</span> <span class="n">fullName</span><span class="p">[</span><span class="o">..&lt;</span><span class="n">spaceIndex</span><span class="p">]</span><span class="c1">//"Matt"</span>
+<span class="k">let</span> <span class="nv">lastName</span> <span class="o">=</span> <span class="n">fullName</span><span class="p">[</span><span class="n">fullName</span><span class="o">.</span><span class="nf">index</span><span class="p">(</span><span class="nv">after</span><span class="p">:</span> <span class="n">spaceIndex</span><span class="p">)</span><span class="o">...</span><span class="p">]</span><span class="c1">//"Galloway"  Type is String.SubSequence</span>
+<span class="k">let</span> <span class="nv">lastNameString</span> <span class="o">=</span> <span class="kt">String</span><span class="p">(</span><span class="n">lastName</span><span class="p">)</span><span class="s">"Galloway"</span>
+</code></pre></div></div>
+
+<h2 id="building-your-own-types">Building Your Own Types</h2>
+
+<h3 id="generics">Generics</h3>
+
+<p><strong>Type constraints</strong></p>
+
+<p>There are two kinds of constraints. The simplest kind of type constraint looks like this:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="kt">Cat</span> <span class="p">{</span>
+  <span class="k">var</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span>
+  
+  <span class="nf">init</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="kt">Dog</span> <span class="p">{</span>
+  <span class="k">var</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span>
+  
+  <span class="nf">init</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">protocol</span> <span class="kt">Pet</span> <span class="p">{</span>
+  <span class="k">var</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span>  <span class="c1">// all pets respond to a name</span>
+<span class="p">}</span>
+<span class="kd">extension</span> <span class="kt">Cat</span><span class="p">:</span> <span class="kt">Pet</span> <span class="p">{}</span>
+<span class="kd">extension</span> <span class="kt">Dog</span><span class="p">:</span> <span class="kt">Pet</span> <span class="p">{}</span>
+
+<span class="kd">class</span> <span class="kt">Keeper</span><span class="o">&lt;</span><span class="kt">Animal</span><span class="p">:</span> <span class="kt">Pet</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="k">var</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span>
+  <span class="k">var</span> <span class="nv">morningCare</span><span class="p">:</span> <span class="kt">Animal</span>
+  <span class="k">var</span> <span class="nv">afternoonCare</span><span class="p">:</span> <span class="kt">Animal</span>
+  
+  <span class="nf">init</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">morningCare</span><span class="p">:</span> <span class="kt">Animal</span><span class="p">,</span> <span class="nv">afternoonCare</span><span class="p">:</span> <span class="kt">Animal</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+    <span class="k">self</span><span class="o">.</span><span class="n">morningCare</span> <span class="o">=</span> <span class="n">morningCare</span>
+    <span class="k">self</span><span class="o">.</span><span class="n">afternoonCare</span> <span class="o">=</span> <span class="n">afternoonCare</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">let</span> <span class="nv">cats</span> <span class="o">=</span> <span class="p">[</span><span class="s">"Miss Gray"</span><span class="p">,</span> <span class="s">"Whiskers"</span><span class="p">,</span> <span class="s">"Sleepy"</span><span class="p">]</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="kt">Cat</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="nv">$0</span><span class="p">)</span> <span class="p">}</span>
+<span class="k">let</span> <span class="nv">dogs</span> <span class="o">=</span> <span class="p">[</span><span class="s">"Sparky"</span><span class="p">,</span> <span class="s">"Rusty"</span><span class="p">,</span> <span class="s">"Astro"</span><span class="p">]</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="kt">Dog</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="nv">$0</span><span class="p">)</span> <span class="p">}</span>
+<span class="k">let</span> <span class="nv">pets</span><span class="p">:</span> <span class="p">[</span><span class="kt">Pet</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="kt">Cat</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"Mittens"</span><span class="p">),</span> <span class="kt">Dog</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"Yeller"</span><span class="p">)]</span>
+
+<span class="c1">//This method handles a array of type *Pet* that can mix *Dog* and *Cat* elements together.</span>
+<span class="kd">func</span> <span class="nf">herd</span><span class="p">(</span><span class="n">_</span> <span class="nv">pets</span><span class="p">:</span> <span class="p">[</span><span class="kt">Pet</span><span class="p">])</span> <span class="p">{</span>
+  <span class="n">pets</span><span class="o">.</span><span class="n">forEach</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"Come </span><span class="se">\(</span><span class="nv">$0</span><span class="o">.</span><span class="n">name</span><span class="se">)</span><span class="s">!"</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">//Handles arrays of any kind of *Pet*, but they all need to be of a single type.</span>
+<span class="kd">func</span> <span class="n">herd</span><span class="o">&lt;</span><span class="kt">Animal</span><span class="p">:</span> <span class="kt">Pet</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">pets</span><span class="p">:</span> <span class="p">[</span><span class="kt">Animal</span><span class="p">])</span> <span class="p">{</span>
+  <span class="n">pets</span><span class="o">.</span><span class="n">forEach</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"Here </span><span class="se">\(</span><span class="nv">$0</span><span class="o">.</span><span class="n">name</span><span class="se">)</span><span class="s">!"</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">//Handles dogs and only dogs (or subtypes of dogs)</span>
+<span class="kd">func</span> <span class="n">herd</span><span class="o">&lt;</span><span class="kt">Animal</span><span class="p">:</span> <span class="kt">Dog</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">dogs</span><span class="p">:</span> <span class="p">[</span><span class="kt">Animal</span><span class="p">])</span> <span class="p">{</span>
+  <span class="n">dogs</span><span class="o">.</span><span class="n">forEach</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"Here </span><span class="se">\(</span><span class="nv">$0</span><span class="o">.</span><span class="n">name</span><span class="se">)</span><span class="s">! Come here!"</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nf">herd</span><span class="p">(</span><span class="n">dogs</span><span class="p">)</span>
+<span class="nf">herd</span><span class="p">(</span><span class="n">cats</span><span class="p">)</span>
+<span class="nf">herd</span><span class="p">(</span><span class="n">pets</span><span class="p">)</span>
+
+<span class="c1">//output:</span>
+<span class="c1">//Here Sparky! Come here!</span>
+<span class="c1">//Here Rusty! Come here!</span>
+<span class="c1">//Here Astro! Come here!</span>
+<span class="c1">//Here Miss Gray!</span>
+<span class="c1">//Here Whiskers!</span>
+<span class="c1">//Here Sleepy!</span>
+<span class="c1">//Come Mittens!</span>
+<span class="c1">//Come Yeller!</span>
+</code></pre></div></div>
+
+<p>You can restrict what kinds of types are allowed to fill the type parameter. <em>type constraints</em></p>
+
+<p>The second kind of type constraint in volves making explicit assertions that a type parameter, or its associated type, must equal another parameter or one of its conforming types.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">extension</span> <span class="kt">Array</span> <span class="k">where</span> <span class="kt">Element</span><span class="p">:</span> <span class="kt">Cat</span> <span class="p">{</span>
+  <span class="kd">func</span> <span class="nf">meow</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">forEach</span> <span class="p">{</span> <span class="nf">print</span><span class="p">(</span><span class="s">"</span><span class="se">\(</span><span class="nv">$0</span><span class="o">.</span><span class="n">name</span><span class="se">)</span><span class="s"> says meow!"</span><span class="p">)</span> <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// dogs.meow() // error: 'Dog' is not a subtype of 'Cat'</span>
+<span class="n">cats</span><span class="o">.</span><span class="nf">meow</span><span class="p">()</span>
+</code></pre></div></div>
+
+
+
+                <hr>
+
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/11/21/Card_Diary_.html" data-toggle="tooltip" data-placement="top" title="Card Diary for iOS">
+                        Previous<br>
+                        <span>Card Diary for iOS</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/12/13/Swift_Apprentice_II.html" data-toggle="tooltip" data-placement="top" title="Swift Apprentice II -- Advanced Topics">
+                        Next<br>
+                        <span>Swift Apprentice II -- Advanced Topics</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+                
+
+            </div>
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <!-- <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+
+                
+            </div> -->
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/jekyll">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                   
+                    
+
+                    
+                    
+                    <!-- delete twitter -->
+                    <!--
+                    
+                    <li>
+                        <a href="https://twitter.com/jekyllrb">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    -->
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; <a href="https://github.com/MrFuFuFu/mrfufufu.github.io">Your awesome title</a> 2019
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a><!--  |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true" >
+                    </iframe> -->
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;    
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+<!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0" /> -->
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
