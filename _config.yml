@@ -1,20 +1,22 @@
 # Site settings
-title: Card Diary
-SEOTitle: Card Diary | Card | Diary
+title: MrFu Blog
+SEOTitle: YuanFu’s blog | MrFu blog
 header-img: img/home-bg.jpg
 email: mrfuyuan@gmail.com
-description: "Card Diary is a perfect place for you to think, feel, discover, remember, and dream."
-keyword: "Card,Diary"
-url: "https://carddiary.me/help"
+description: "Hi, I’m Fu Yuan, a Mobile Developer"
+keyword: "Yuan Fu, YuanFu, FuYuan, Fu Yuan, 傅圆, MrFu, 傅傅傅先生, MrFuFuFu, Mr.Fu, @傅圆, 傅圆的博客, MrFu Blog, 博客, 个人网站, 互联网, Android, iOS, Swift, Java"
+url: "https://mrfu.me"
 baseurl: ""
 
 
 
 # SNS settings
 RSS: false
-twitter_username: card_diary
-# facebook_username:  mrfufufu
-instagram_username: card.diary
+#twitter_username: 15068728607
+github_username:  mrfufufu
+facebook_username:  mrfufufu
+linkedin_username: mrfufufu
+instagram_username: mrfufufufu
 
 
 # Build settings
@@ -41,19 +43,19 @@ kramdown:
   input: GFM                            # use Github Flavored Markdown !important
 
 # Disqus settings
-# disqus_username: mrfu
+disqus_username: mrfu
 
 # Analytics settings
 # Baidu Analytics
-# ba_track_id: c3407349cc1129e07d0c33c8714b6175
+ba_track_id: c3407349cc1129e07d0c33c8714b6175
 # Google Analytics
-# ga_track_id: 'UA-69471101-1'            # Format: UA-xxxxxx-xx
-# ga_domain: mrfu
+ga_track_id: 'UA-69471101-1'            # Format: UA-xxxxxx-xx
+ga_domain: mrfu
 
 
 
 # Sidebar settings
-sidebar: false                           # whether or not using Sidebar.
+sidebar: true                           # whether or not using Sidebar.
 sidebar-about-description: "Coder, Paraglider, Marathoner, RC Helicopter"
 sidebar-avatar: /img/avatar-mrfu.png     # use absolute URL.
 
@@ -66,16 +68,16 @@ featured-condition-size: 1              # A tag will be featured if the size of 
 
 
 # Friends
-# friends: [
-#     {
-#         title: "maple Blog",
-#         href: "http://maples.me/"
-#     },{
-#         title: "程序亦非猿的OnePiece",
-#         href: "http://yifeiyuan.me/"
-#     },{
-#         title: "小鄧子 - 简书",
-#         href: "http://www.jianshu.com/users/df40282480b4/latest_articles"
-#     }
-# ]
+friends: [
+    {
+        title: "maple Blog",
+        href: "http://maples.me/"
+    },{
+        title: "程序亦非猿的OnePiece",
+        href: "http://yifeiyuan.me/"
+    },{
+        title: "小鄧子 - 简书",
+        href: "http://www.jianshu.com/users/df40282480b4/latest_articles"
+    }
+]
 

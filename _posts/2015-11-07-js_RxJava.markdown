@@ -1,0 +1,35 @@
+---
+layout:     keynote
+title:      "指尖上的RxJava"
+subtitle:   "Keynote: A finger tips of RxJava"
+iframe:     "//mrfu.me/rxjava-keynote/"
+date:       2015-11-07
+author:     "MrFu"
+header-img: "img/post-bg-js-version.jpg"
+tags:
+    - RxJava
+---
+
+
+> Click *Watch Slides to separate page*
+
+RxJava
+
+I shared this article in our technology sharing meeting in our company(Haihu). This keynote is about the **Reactive Programming** and what is **RxJava** and how to use into Android.
+
+
+
+### [Watch Slides →](//mrfu.me/rxjava-keynote)
+
+<img src="http://mrfu.me/rxjava-keynote/attach/qrcode.png" width="300" height="300"/>
+
+
+
+<small class="img-hint">You can also scan QR code to browser it on your mobile devices</small>
+
+[去 star 我的 Github](https://github.com/MrFuFuFu/rxjava-keynote)
+
+### Thanks
+
+[Reveal.js](http://lab.hakim.se/reveal-js)
+[huangxuan](http://huangxuan.me/2015/07/09/js-module-7day/)
